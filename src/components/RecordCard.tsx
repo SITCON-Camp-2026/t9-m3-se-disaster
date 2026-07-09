@@ -13,6 +13,7 @@ type RecordLike = {
   verificationStatus: string;
   updatedAt: string;
   canWash?: boolean;
+  arrivedCount?: number;
   attachments?: { id: string; name: string; url: string; mimeType?: string }[];
   note?: string;
   toolSuggestion?: string;
@@ -24,7 +25,7 @@ type RecordCardProps = {
   judgement?: { neededPeople?: number };
   onReport?: (id: string) => void;
   onToggleWash?: (id: string) => void;
-  onMarkArrived?: (id: string) => void;
+  onMarkArrived?: (count: number) => void;
   onAddAttachment?: (file: File) => void;
   onRemoveAttachment?: (id: string) => void;
   onSaveNote?: (text: string) => void;
@@ -39,6 +40,7 @@ export function RecordCard({ record, judgement, onReport, onToggleWash, onMarkAr
   const residentReport = record.reports?.find(
     (report) => report.reporterRole === "resident" && report.address,
   );
+  const residentAddress = residentReport?.address ?? "";
   const [note, setNote] = useState<string>(record.note ?? "");
 
   useEffect(() => {
@@ -77,7 +79,7 @@ export function RecordCard({ record, judgement, onReport, onToggleWash, onMarkAr
             <iframe
               title="Resident address map"
               src={`https://www.openstreetmap.org/export/embed.html?query=${encodeURIComponent(
-                residentReport.address,
+                residentAddress,
               )}`}
             />
           </div>

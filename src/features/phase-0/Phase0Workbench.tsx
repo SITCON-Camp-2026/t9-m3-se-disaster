@@ -93,7 +93,7 @@ export function Phase0Workbench({
     onUpdateRecords(next);
   }
 
-  function handleAddReport(recordId: string, report: { text?: string; attachmentId?: string; address?: string; type: "text" | "media" }) {
+  function handleAddReport(recordId: string, report: { text?: string; attachmentId?: string; address?: string; type: "text" | "media"; reporterRole?: "resident" | "volunteer" }) {
     if (!onUpdateRecords) return;
     const r = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
