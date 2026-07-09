@@ -89,7 +89,7 @@ export function Phase0JudgementCard({
             <iframe
               title="Address map"
               src={`https://www.openstreetmap.org/export/embed.html?query=${encodeURIComponent(
-                residentReport.address,
+                residentReport.address!,
               )}`}
               style={{
                 width: "100%",
@@ -102,7 +102,7 @@ export function Phase0JudgementCard({
           <div style={{ marginTop: 6 }}>
             <a
               href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(
-                residentReport.address,
+                residentReport.address!,
               )}`}
               target="_blank"
               rel="noreferrer"

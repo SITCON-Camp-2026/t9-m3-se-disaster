@@ -107,7 +107,7 @@ export function Phase0Workbench({
     report: {
       text?: string;
       attachmentId?: string;
-      address?: string;
+      address?: string | number | boolean;
       type: "text" | "media";
       reporterRole?: "resident" | "volunteer";
     },

@@ -39,7 +39,7 @@ export type Phase0MessyRecord = {
     type: "text" | "media";
     text?: string;
     attachmentId?: string;
-    address?: string;
+    address?: string | number | boolean;
     reporterRole?: "resident" | "volunteer";
     createdAt?: string;
   }>;

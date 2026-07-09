@@ -18,7 +18,7 @@ type RecordLike = {
   note?: string;
   toolSuggestion?: string;
   reports?: Array<{
-    address?: string;
+    address?: string | number | boolean;
     reporterRole?: "resident" | "volunteer";
   }>;
 };
@@ -36,7 +36,7 @@ type RecordCardProps = {
   onAddReport?: (r: {
     text?: string;
     attachmentId?: string;
-    address?: string;
+    address?: string | number | boolean;
     type: "text" | "media";
     reporterRole?: "resident" | "volunteer";
   }) => void;
