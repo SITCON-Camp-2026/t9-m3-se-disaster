@@ -28,6 +28,13 @@ const nextStepLabels: Record<
   do_not_use_yet: "暫時不要使用",
 };
 
+function visibleListItems(items: readonly (string | undefined)[]) {
+  return items.map((item, index) => ({
+    key: `${index}-${item ?? "empty"}`,
+    text: item ?? "尚未填寫，仍需要人工確認。",
+  }));
+}
+
 export function Phase0JudgementCard({
   judgement,
   record,
@@ -122,8 +129,8 @@ export function Phase0JudgementCard({
       <section>
         <h4>目前只有安全預設</h4>
         <ul>
-          {judgement.evidence.map((item) => (
-            <li key={item}>{item}</li>
+          {visibleListItems(judgement.evidence).map((item) => (
+            <li key={item.key}>{item.text}</li>
           ))}
         </ul>
       </section>
@@ -131,8 +138,8 @@ export function Phase0JudgementCard({
       <section>
         <h4>目前卡住的地方</h4>
         <ul>
-          {judgement.blockers.map((item) => (
-            <li key={item}>{item}</li>
+          {visibleListItems(judgement.blockers).map((item) => (
+            <li key={item.key}>{item.text}</li>
           ))}
         </ul>
       </section>
