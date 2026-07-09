@@ -145,6 +145,84 @@ button {
   margin-top: 14px;
 }
 
+.address-map-box {
+  margin-top: 14px;
+  border: 1px solid #cdd7e6;
+  border-radius: 12px;
+  padding: 14px;
+  background: #f2f7ff;
+}
+
+.address-map-box__header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: #2e4a70;
+}
+
+.address-map-box__header strong {
+  font-size: 0.95rem;
+}
+
+.address-map-box__frame {
+  border: 1px solid #aec7e8;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.address-map-box__frame iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  border: 0;
+}
+
+.address-map-box__footer {
+  margin-top: 10px;
+}
+
+.address-map-box__footer a {
+  color: #2f67b1;
+  text-decoration: none;
+}
+
+.address-map-box__footer a:hover {
+  text-decoration: underline;
+}
+
+.address-map-banner {
+  margin-top: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f4f8ff 0%, #eef5ff 100%);
+  box-shadow: inset 0 0 0 1px rgba(13, 60, 132, 0.08);
+}
+
+.address-map-banner__info {
+  padding: 14px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #1f3d6f;
+}
+
+.address-map-banner__info strong {
+  font-size: 0.95rem;
+}
+
+.address-map-banner__iframe {
+  min-height: 220px;
+}
+
+.address-map-banner__iframe iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
 .workbench {
   display: grid;
   gap: 20px;
@@ -158,13 +236,171 @@ button {
   background: #fbfcfe;
 }
 
-.workbench__intro h2 {
-  margin: 0 0 8px;
+.workbench__intro-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.workbench__intro-heading {
+  display: grid;
+  gap: 10px;
+}
+
+.workbench__intro-heading h2 {
+  margin: 0;
   font-size: 1.25rem;
+}
+
+.workbench__intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.workbench__intro-role {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .workbench__intro p:last-child {
   margin-bottom: 0;
+}
+
+.workbench__filter-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.workbench__filter-label select {
+  margin-left: 8px;
+}
+
+.record-list-item__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.record-card__actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.record-card__section {
+  margin-top: 12px;
+}
+
+.record-card__form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.record-card__form-field input,
+.record-card__form-field select,
+.record-card__form-field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  padding: 10px;
+  background: #ffffff;
+}
+
+.record-card__attachment-list {
+  margin-top: 8px;
+  display: grid;
+  gap: 10px;
+}
+
+.record-card__attachment-item {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #e1e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.record-card__media-preview {
+  width: 100%;
+  max-width: 100%;
+}
+
+.record-card__attachment-remove {
+  margin-left: 8px;
+}
+
+.record-card__button-row {
+  margin-top: 8px;
+}
+
+.record-card__note-section {
+  display: grid;
+  gap: 10px;
+}
+
+.record-card__note-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrival-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e6f4ea;
+  color: #18632d;
+  border: 1px solid #c7e0cc;
+  font-size: 0.9rem;
+}
+
+.record-card__arrival-count,
+.record-card__arrival-status {
+  margin-top: 10px;
+}
+
+.record-card__arrival-button {
+  border: 1px solid #2f67b1;
+  background: #eef4ff;
+  color: #1f3f7c;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.record-card__arrival-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.arrival-full,
+.arrival-progress {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+.arrival-full {
+  color: #b04d00;
+  background: #fff3e0;
+  border: 1px solid #f2c078;
+}
+
+.arrival-progress {
+  color: #2e4a70;
+  background: #eef4ff;
+  border: 1px solid #c6d9f1;
 }
 
 .workbench__layout {
@@ -272,6 +508,13 @@ button {
 .status-unknown {
   background: #fff3cd;
   color: #8a5a00;
+}
+
+/* Add a warning icon before badges that need attention without changing text content */
+.status-needs_review::before,
+.status-unverified::before {
+  content: "⚠️ ";
+  margin-right: 6px;
 }
 
 .status-verified,

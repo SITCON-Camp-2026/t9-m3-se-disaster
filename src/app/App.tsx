@@ -16,6 +16,9 @@ const phase0Records = messyReports satisfies Phase0MessyRecord[];
 
 export function App() {
   const [activeTab, setActiveTab] = useState<TabKey>("raw");
+  const [records, setRecords] = useState<Phase0MessyRecord[]>(
+    phase0Records,
+  );
   const [selectedRecordId, setSelectedRecordId] = useState(
     phase0Records[0]?.id ?? "",
   );
@@ -60,9 +63,10 @@ export function App() {
           />
         ) : (
           <Phase0Workbench
-            records={phase0Records}
+            records={records}
             selectedRecordId={selectedRecordId}
             onSelect={setSelectedRecordId}
+            onUpdateRecords={setRecords}
           />
         )}
       </section>

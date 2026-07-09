@@ -35,6 +35,10 @@ export function Phase0JudgementCard({
   judgement: Phase0JudgementDraft;
   record: Phase0MessyRecord;
 }) {
+  const residentReport = record.reports?.find(
+    (report) => report.reporterRole === "resident" && report.address,
+  );
+
   return (
     <article className="judgement-card">
       <div className="judgement-card__header">
@@ -64,6 +68,44 @@ export function Phase0JudgementCard({
           <dd>{nextStepLabels[judgement.suggestedNextStep]}</dd>
         </div>
       </dl>
+
+      {record.canWash ? (
+        <div style={{ marginTop: 12 }}>
+          <strong>資源提示：</strong>此地點已被標註為「可清洗身體」
+        </div>
+      ) : null}
+      {residentReport ? (
+        <div style={{ marginTop: 12 }}>
+          <strong>地點：</strong>
+          {residentReport.address}
+          <div style={{ marginTop: 8 }}>
+            <iframe
+              title="Address map"
+              src={`https://www.openstreetmap.org/export/embed.html?query=${encodeURIComponent(
+                residentReport.address,
+              )}`}
+              style={{ width: "100%", minHeight: 240, border: "1px solid #dbe4ef", borderRadius: 8 }}
+            />
+          </div>
+          <div style={{ marginTop: 6 }}>
+            <a
+              href={`https://www.openstreetmap.org/search?query=${encodeURIComponent(
+                residentReport.address,
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              在地圖中開啟
+            </a>
+          </div>
+        </div>
+      ) : null}
+
+      <div style={{ marginTop: 12 }}>
+        <strong>估計需要人數：</strong>
+        {/* @ts-ignore */}
+        {judgement.neededPeople} 人（由回報與原文自動估算，需人工確認）
+      </div>
 
       <p>
         能否直接行動：

@@ -23,6 +23,26 @@ export type Phase0MessyRecord = {
   sourceType: string;
   verificationStatus: string;
   updatedAt: string;
+  canWash?: boolean;
+  arrived?: boolean;
+  arrivedCount?: number;
+  attachments?: {
+    id: string;
+    name: string;
+    url: string;
+    mimeType?: string;
+  }[];
+  note?: string;
+  toolSuggestion?: string;
+  reports?: Array<{
+    id: string;
+    type: "text" | "media";
+    text?: string;
+    attachmentId?: string;
+    address?: string;
+    reporterRole?: "resident" | "volunteer";
+    createdAt?: string;
+  }>;
 };
 
 export type Phase0JudgementDraft = {
@@ -34,4 +54,5 @@ export type Phase0JudgementDraft = {
   suggestedNextStep: Phase0SuggestedNextStep;
   unsafeToActDirectly: boolean;
   humanReviewNote?: string;
+  neededPeople?: number;
 };
