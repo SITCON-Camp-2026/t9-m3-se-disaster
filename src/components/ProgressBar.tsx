@@ -13,22 +13,22 @@ export function ProgressBar({
       <div
         style={{
           height: 10,
-          background: '#e6eef8',
+          background: "#e6eef8",
           borderRadius: 6,
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
         aria-hidden
       >
         <div
           style={{
-            height: '100%',
+            height: "100%",
             width: `${pct}%`,
-            background: '#245d9d',
-            transition: 'width 200ms ease',
+            background: "#245d9d",
+            transition: "width 200ms ease",
           }}
         />
       </div>
-      <div style={{ marginTop: 6, fontSize: '0.85rem', color: '#5f6b7a' }}>
+      <div style={{ marginTop: 6, fontSize: "0.85rem", color: "#5f6b7a" }}>
         {label ?? `${pct}% 已協助 (${value}/${max})`}
       </div>
     </div>

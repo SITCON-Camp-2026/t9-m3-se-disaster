@@ -22,7 +22,9 @@ export function Phase0Workbench({
     records.find((record) => record.id === selectedRecordId) ?? records[0];
   const safetyBoundary = createPhase0Judgement(selectedRecord);
   const [sourceFilter, setSourceFilter] = useState<string>("all");
-  const [userRole, setUserRole] = useState<"resident" | "volunteer">("volunteer");
+  const [userRole, setUserRole] = useState<"resident" | "volunteer">(
+    "volunteer",
+  );
 
   const sources = useMemo(() => {
     const set = new Set(records.map((r) => r.sourceType));
@@ -34,7 +36,9 @@ export function Phase0Workbench({
       ? records
       : records.filter((r) => r.sourceType === sourceFilter);
 
-  const fulfilledCount = records.filter((r) => r.verificationStatus === "fulfilled").length;
+  const fulfilledCount = records.filter(
+    (r) => r.verificationStatus === "fulfilled",
+  ).length;
 
   function handleReportAssisted(recordId: string) {
     if (!onUpdateRecords) return;
@@ -87,13 +91,27 @@ export function Phase0Workbench({
     if (!onUpdateRecords) return;
     const next = records.map((r) =>
       r.id === recordId
-        ? { ...r, attachments: (r.attachments ?? []).filter((a) => a.id !== attachmentId) }
+        ? {
+            ...r,
+            attachments: (r.attachments ?? []).filter(
+              (a) => a.id !== attachmentId,
+            ),
+          }
         : r,
     );
     onUpdateRecords(next);
   }
 
-  function handleAddReport(recordId: string, report: { text?: string; attachmentId?: string; address?: string; type: "text" | "media"; reporterRole?: "resident" | "volunteer" }) {
+  function handleAddReport(
+    recordId: string,
+    report: {
+      text?: string;
+      attachmentId?: string;
+      address?: string;
+      type: "text" | "media";
+      reporterRole?: "resident" | "volunteer";
+    },
+  ) {
     if (!onUpdateRecords) return;
     const r = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
@@ -104,7 +122,11 @@ export function Phase0Workbench({
       createdAt: new Date().toISOString(),
       reporterRole: report.reporterRole ?? userRole,
     };
-    const next = records.map((rec) => (rec.id === recordId ? { ...rec, reports: [...(rec.reports ?? []), r] } : rec));
+    const next = records.map((rec) =>
+      rec.id === recordId
+        ? { ...rec, reports: [...(rec.reports ?? []), r] }
+        : rec,
+    );
     onUpdateRecords(next);
   }
 
@@ -123,35 +145,46 @@ export function Phase0Workbench({
 
   function handleSaveNote(recordId: string, text: string) {
     if (!onUpdateRecords) return;
-    const next = records.map((r) => (r.id === recordId ? { ...r, note: text } : r));
+    const next = records.map((r) =>
+      r.id === recordId ? { ...r, note: text } : r,
+    );
     onUpdateRecords(next);
   }
 
   function handleSaveToolSuggestion(recordId: string, text: string) {
     if (!onUpdateRecords) return;
-    const next = records.map((r) => (r.id === recordId ? { ...r, toolSuggestion: text } : r));
+    const next = records.map((r) =>
+      r.id === recordId ? { ...r, toolSuggestion: text } : r,
+    );
     onUpdateRecords(next);
   }
 
   return (
     <div className="workbench">
-        <div className="workbench__intro">
+      <div className="workbench__intro">
         <p className="eyebrow">整理工作台</p>
         <div className="workbench__intro-grid">
           <div className="workbench__intro-heading">
-            <h2>第一階段的成功不是分類正確，而是把為什麼現在還不能判斷說清楚。</h2>
+            <h2>
+              第一階段的成功不是分類正確，而是把為什麼現在還不能判斷說清楚。
+            </h2>
             <ProgressBar value={fulfilledCount} max={records.length} />
           </div>
 
           <div className="workbench__intro-actions">
             <label className="workbench__intro-role">
               我是：
-              <select value={userRole} onChange={(e) => setUserRole(e.target.value as any)}>
+              <select
+                value={userRole}
+                onChange={(e) => setUserRole(e.target.value as any)}
+              >
                 <option value="volunteer">救災志工（提供幫助）</option>
                 <option value="resident">受災戶（需要幫忙）</option>
               </select>
             </label>
-            <button type="button" onClick={exportRecords}>下載紀錄 (JSON)</button>
+            <button type="button" onClick={exportRecords}>
+              下載紀錄 (JSON)
+            </button>
           </div>
         </div>
         <p>
@@ -164,7 +197,10 @@ export function Phase0Workbench({
         <aside className="workbench__queue" aria-label="選擇原始資訊">
           <label className="workbench__filter-label">
             來源：
-            <select value={sourceFilter} onChange={(e) => setSourceFilter(e.target.value)}>
+            <select
+              value={sourceFilter}
+              onChange={(e) => setSourceFilter(e.target.value)}
+            >
               {sources.map((s) => (
                 <option key={s} value={s}>
                   {s === "all" ? "全部來源" : labelForSource(s)}
@@ -182,9 +218,18 @@ export function Phase0Workbench({
             >
               <div className="record-list-item__header">
                 <span>{record.id}</span>
-                <span className="source-label">{labelForSource(record.sourceType)}</span>
+                <span className="source-label">
+                  {labelForSource(record.sourceType)}
+                </span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: 8 }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  marginTop: 8,
+                }}
+              >
                 <StatusBadge status={record.verificationStatus} />
                 {record.arrived ? (
                   <span className="arrival-label">已到達</span>
@@ -216,11 +261,19 @@ export function Phase0Workbench({
             currentUserRole={userRole}
             onReport={handleReportAssisted}
             onToggleWash={handleToggleWash}
-            onMarkArrived={(count) => handleMarkArrived(selectedRecord.id, count)}
-            onAddAttachment={(file) => handleAddAttachment(selectedRecord.id, file)}
-            onRemoveAttachment={(id) => handleRemoveAttachment(selectedRecord.id, id)}
+            onMarkArrived={(count) =>
+              handleMarkArrived(selectedRecord.id, count)
+            }
+            onAddAttachment={(file) =>
+              handleAddAttachment(selectedRecord.id, file)
+            }
+            onRemoveAttachment={(id) =>
+              handleRemoveAttachment(selectedRecord.id, id)
+            }
             onSaveNote={(text) => handleSaveNote(selectedRecord.id, text)}
-            onSaveToolSuggestion={(text) => handleSaveToolSuggestion(selectedRecord.id, text)}
+            onSaveToolSuggestion={(text) =>
+              handleSaveToolSuggestion(selectedRecord.id, text)
+            }
             onAddReport={(r) => handleAddReport(selectedRecord.id, r)}
           />
 

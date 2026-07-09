@@ -84,7 +84,12 @@ export function Phase0JudgementCard({
               src={`https://www.openstreetmap.org/export/embed.html?query=${encodeURIComponent(
                 residentReport.address,
               )}`}
-              style={{ width: "100%", minHeight: 240, border: "1px solid #dbe4ef", borderRadius: 8 }}
+              style={{
+                width: "100%",
+                minHeight: 240,
+                border: "1px solid #dbe4ef",
+                borderRadius: 8,
+              }}
             />
           </div>
           <div style={{ marginTop: 6 }}>

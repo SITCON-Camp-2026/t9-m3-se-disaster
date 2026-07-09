@@ -30,7 +30,11 @@ export function createPhase0Judgement(
     ? ["仍需確認這筆資訊適合進入哪個後續流程。"]
     : ["目前不是已確認資訊，不能直接行動或當成事實發布。"];
 
-  const suggestedNextStep = isVerified ? "keep_raw" : numReports > 0 ? "ask_for_more_info" : "send_to_human_review";
+  const suggestedNextStep = isVerified
+    ? "keep_raw"
+    : numReports > 0
+      ? "ask_for_more_info"
+      : "send_to_human_review";
 
   return {
     messyRecordId: record.id,
@@ -40,7 +44,10 @@ export function createPhase0Judgement(
     blockers,
     suggestedNextStep,
     unsafeToActDirectly: !isVerified,
-    humanReviewNote: numReports > 0 ? "有現場回報，請人工審核附檔與文字以決定需人數" : undefined,
+    humanReviewNote:
+      numReports > 0
+        ? "有現場回報，請人工審核附檔與文字以決定需人數"
+        : undefined,
     neededPeople,
   };
 }
